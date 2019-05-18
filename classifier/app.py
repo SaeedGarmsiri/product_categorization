@@ -1,6 +1,6 @@
 from flask import Flask, request
 from flask_restful import Api
-from product_matching.evaluator import Evaluator
+from evaluator.classifier_evaluator import Evaluator
 import json
 
 app = Flask(__name__)

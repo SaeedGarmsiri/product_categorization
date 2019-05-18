@@ -16,7 +16,7 @@ class CreateDataset:
 
         df = pd.read_csv(self.filename)
         df.head()
-        col = ['url_id', 'bm_title', 'bm_brand', 'bm_cat1', 'bm_cat2', 'bm_cat3', 'bm_warranty', 'DK_Entitle', 'DK_Fatitle', 'DK_titlealt', 'DK_titleKey', 'DK_site_firstcat', 'DK_site_secondcat', 'DK_site_thirdcat', 'DK_supply_catFa', 'DK_site_firstcat', 'DK_supply_maincatFa', 'DK_supply_maincatEn', 'DK_brandEn', 'DK_brandFa', 'dkp']
+        col = ['url_id', 'comp_title', 'comp_brand', 'comp_cat1', 'comp_cat2', 'comp_cat3', 'comp_warranty', 'Entitle', 'Fatitle', 'titlealt', 'titleKey', 'site_firstcat', 'site_secondcat', 'site_thirdcat', 'DK_supply_catFa', 'site_firstcat', 'supply_maincatFa', 'supply_maincatEn', 'brandEn', 'brandFa', 'product_id']
         df = df[col]
         df = df.sample(frac=1).reset_index(drop=True)
         # zz = df.isnull().values.any()

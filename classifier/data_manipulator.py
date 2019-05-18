@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.feature_extraction.text import TfidfTransformer, CountVectorizer
-import libraries.persian as persian
+import libraries.persian_char_mapper as persian
 from sklearn.externals import joblib
 import os
 
@@ -18,15 +18,15 @@ class DataManipulator:
         df = pd.read_csv(adr)
         df.head()
         df.replace(np.nan, ' ', inplace=True, regex=True)
-        col = ['url_id', 'bm_title', 'bm_brand', 'bm_cat1', 'bm_cat2', 'bm_cat3',
-               'bm_warranty', 'DK_site_firstcat', 'DK_supply_maincatEn', 'dkp']
+        col = ['url_id', 'comp_title', 'comp_brand', 'comp_cat1', 'comp_cat2', 'comp_cat3',
+               'comp_warranty', 'site_firstcat', 'supply_maincatEn', 'product_id']
         df = df[col]
         df.drop(['url_id'], inplace=True, axis=1)
-        df['features'] = df['bm_title'] + ' ' + df['bm_brand'] + ' ' + df['bm_cat1'] + ' ' + \
-                         df['bm_cat2'] + ' ' + df['bm_cat3'] + ' ' + df['bm_warranty']
-        ff = df.loc[df['DK_supply_maincatEn'] == 'Fresh Food']
+        df['features'] = df['comp_title'] + ' ' + df['comp_brand'] + ' ' + df['comp_cat1'] + ' ' + \
+                         df['comp_cat2'] + ' ' + df['comp_cat3'] + ' ' + df['comp_warranty']
+        ff = df.loc[df['supply_maincatEn'] == 'Fresh Food']
         df.drop(ff.index, inplace=True)
-        cols = ['dkp', 'features', 'DK_site_firstcat']
+        cols = ['product_id', 'features', 'site_firstcat']
         df = df[cols]
         return df
 
@@ -34,7 +34,7 @@ class DataManipulator:
 
         df = self.read_data(adr)
         x_train = df['features']
-        y_train = df['DK_site_firstcat']
+        y_train = df['site_firstcat']
         return df, x_train, y_train
 
     def train_feature_engineering(self, x):
